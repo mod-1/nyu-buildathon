@@ -49,6 +49,22 @@ def getActivities():
 
     return json.dumps(getActivitiesJson(queryString))
 
+@app.route('/hotels/filterHotels')
+def getHotels():
+    '''
+    params:
+    category: str -> Denotes the category from (hotel, homestay, villa, resort)
+
+
+    '''
+    querystring = {"query":"Gulmarg"}
+
+    querystring = {
+        "dest_id":"-2092174",
+        "search_type":"CITY",
+        "arrival_date":
+        "2025-03-04","departure_date":"2025-03-20","adults":"1","children_age":"0,17","room_qty":"1","page_number":"1","sort_by":"price","categories_filter":"hotel","units":"metric","temperature_unit":"c","languagecode":"en-us","currency_code":"USD"}
+
 
 
 if __name__ == '__main__':
