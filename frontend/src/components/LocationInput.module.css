@@ -1,0 +1,63 @@
+.formGroup {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    gap: 0.5rem;
+}
+
+.formGroup label {
+    font-size: 0.9rem;
+    color: #a0a0a0;
+}
+
+.locationInputGroup {
+    display: flex;
+    gap: 10px;
+}
+
+.locationInputGroup input {
+    flex: 1;
+    padding: 0.8rem;
+    border-radius: 8px;
+    border: 1px solid #333;
+    background-color: #2a2a2a;
+    color: white;
+    transition: border-color 0.3s ease;
+}
+
+.locationInputGroup input:focus {
+    border-color: #646cff;
+    outline: none;
+}
+
+.locationButton {
+    background-color: #535bf2;
+    border: none;
+    border-radius: 8px;
+    width: 40px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+}
+
+.locationButton:hover {
+    background-color: #646cff;
+}
+
+.locationIcon {
+    font-size: 1.2rem;
+}
+
+.errorText {
+    color: #ff6b6b;
+    font-size: 0.8rem;
+    margin-top: 0.5rem;
+}
+
+.loadingText {
+    color: #a0a0a0;
+    font-size: 0.8rem;
+    margin-top: 0.5rem;
+}
