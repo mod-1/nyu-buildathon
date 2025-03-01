@@ -47,6 +47,8 @@ const JourneyForm = ({
         <TravelTypeSelector
           travelType={travelType}
           onSelectType={handleTravelTypeSelect}
+          tripDuration={tripDuration}
+          startLocation={startLocation}
         />
       )}
     </div>

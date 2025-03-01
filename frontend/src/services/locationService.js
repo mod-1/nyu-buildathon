@@ -17,7 +17,7 @@ const getCurrentLocationFromAPI = async (position) => {
 
             return formattedLocation || `${latitude}, ${longitude}`
         } else {
-            return `${latitude}, ${longitude}`
+            return `${latitude}; ${longitude}`
         }
     } catch (error) {
         console.error("Error fetching location:", error)
