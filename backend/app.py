@@ -1,7 +1,10 @@
 from flask import Flask,request as req
 from claudeMethods import getItineryJson,getActivitiesJson
 import json
+from flask_cors import CORS
+
 app = Flask(__name__)
+CORS(app)  # Enable CORS for all routes
 
 @app.route('/')
 def home():
@@ -41,7 +44,7 @@ def getActivities():
     queryString=""
     queryString += "I want to visit "+params["country"]+" for " + params["days"] + " days.\n"
     queryString += "I am travelling "+params["travellingWith"]+".\n"
-    queryString += "I want to visit places that are "+params["placeType"]+".\n"
+    queryString += "I want to visit places that have "+params["placeType"]+".\n"
     # queryString += "I want to stay in "+params["stayType"]+".\n"
 
     return json.dumps(getActivitiesJson(queryString))
