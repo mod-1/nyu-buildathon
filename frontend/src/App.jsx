@@ -1,8 +1,10 @@
 import { useState } from 'react'
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import './App.css'
 import Topbar from './components/Topbar'
 import LandingPage from './components/LandingPage'
 import JourneyForm from './components/JourneyForm'
+import ActivityComparison from "./components/ActivityComparision"
 import { getCurrentLocationFromAPI } from './services/locationService'
 
 function App() {
@@ -15,17 +17,28 @@ function App() {
   const [formSubmitted, setFormSubmitted] = useState(false)
   const [travelType, setTravelType] = useState(null)
 
+  const resetAppState = () => {
+    setStarted(false);
+    setStartLocation('');
+    setStartDate('');
+    setTripDuration('');
+    setIsLoadingLocation(false);
+    setLocationError('');
+    setFormSubmitted(false);
+    setTravelType(null);
+  }
+
   // Function to get current location using browser's Geolocation API
   const getCurrentLocation = () => {
     setIsLoadingLocation(true)
     setLocationError('')
-    
+
     if (!navigator.geolocation) {
       setLocationError('Geolocation is not supported by your browser')
       setIsLoadingLocation(false)
       return
     }
-    
+
     navigator.geolocation.getCurrentPosition(
       async (position) => {
         try {
@@ -61,31 +74,41 @@ function App() {
   }
 
   return (
-    <div className="app-container">
-      <Topbar />
-      
-      <div className="content">
-        {!started ? (
-          <LandingPage onStart={() => setStarted(true)} />
-        ) : (
-          <JourneyForm
-            startLocation={startLocation}
-            setStartLocation={setStartLocation}
-            startDate={startDate}
-            setStartDate={setStartDate}
-            tripDuration={tripDuration}
-            setTripDuration={setTripDuration}
-            isLoadingLocation={isLoadingLocation}
-            locationError={locationError}
-            getCurrentLocation={getCurrentLocation}
-            handleSubmit={handleSubmit}
-            formSubmitted={formSubmitted}
-            travelType={travelType}
-            handleTravelTypeSelect={handleTravelTypeSelect}
-          />
-        )}
+    <BrowserRouter>
+      <div className="app-container">
+        <Topbar resetAppState={resetAppState} />
+
+        <div className="content">
+          <Routes>
+            <Route path="/" element={
+              !started ? (
+                <LandingPage onStart={() => setStarted(true)} />
+              ) : (
+                <JourneyForm
+                  startLocation={startLocation}
+                  setStartLocation={setStartLocation}
+                  startDate={startDate}
+                  setStartDate={setStartDate}
+                  tripDuration={tripDuration}
+                  setTripDuration={setTripDuration}
+                  isLoadingLocation={isLoadingLocation}
+                  locationError={locationError}
+                  getCurrentLocation={getCurrentLocation}
+                  handleSubmit={handleSubmit}
+                  formSubmitted={formSubmitted}
+                  travelType={travelType}
+                  handleTravelTypeSelect={handleTravelTypeSelect}
+                />
+              )
+            } />
+            <Route
+              path="/activity-comparison"
+              element={<ActivityComparison />}
+            />
+          </Routes>
+        </div>
       </div>
-    </div>
+    </BrowserRouter>
   )
 }
 

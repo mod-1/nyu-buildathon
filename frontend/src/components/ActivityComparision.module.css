@@ -1,0 +1,119 @@
+.comparisonContainer {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+  text-align: center;
+}
+
+.subtitle {
+  color: #777;
+  margin-bottom: 2rem;
+}
+
+.activitiesGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+  margin: 2rem 0;
+}
+
+.activityTile {
+  background: white;
+  border-radius: 16px;
+  padding: 1.5rem;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.activityTile:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.15);
+}
+
+.activityImage {
+  height: 200px;
+  background: linear-gradient(135deg, #6e8efb, #a777e3);
+  border-radius: 12px;
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.activityIcon {
+  font-size: 4rem;
+}
+
+.activityTile h3 {
+  margin-bottom: 1rem;
+  color: #333;
+}
+
+.activityTile p {
+  color: #666;
+  flex-grow: 1;
+}
+
+.regenerateButton {
+  background: #f1f1f1;
+  border: none;
+  padding: 0.8rem 1.5rem;
+  font-size: 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  color: #555;
+  margin-top: 2rem;
+  transition: background-color 0.2s ease;
+}
+
+.regenerateButton:hover {
+  background: #e0e0e0;
+}
+
+@media (max-width: 768px) {
+  .activitiesGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.continueButton {
+  background: #646cff;
+  color: white;
+  font-weight: 500;
+  padding: 12px 24px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s;
+  margin-top: 2rem;
+}
+
+.continueButton:hover {
+  background: #535bf2;
+}
+
+.skipText {
+  margin-top: 1.5rem;
+  color: #777;
+  font-size: 14px;
+}
+
+.progressBar {
+  width: 100%;
+  height: 8px;
+  background: #eee;
+  border-radius: 4px;
+  margin: 1.5rem 0;
+  overflow: hidden;
+}
+
+.progressFill {
+  height: 100%;
+  background: #646cff;
+  transition: width 0.3s ease;
+}
