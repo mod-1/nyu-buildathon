@@ -123,7 +123,7 @@ const TravelTypeSelector = ({ travelType, onSelectType, tripDuration, tripStartD
 
       data.places.forEach(place => {
         place.activities.forEach(activity => {
-          flattenedActivities[activity] = place.name;
+          flattenedActivities[activity] = place.location;
         });
       });
       console.log('Trip suggestions received:', data);
