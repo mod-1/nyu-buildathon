@@ -163,12 +163,31 @@
 }
 
 .dayHeader {
-  padding: 1.5rem;
-  background: #1e1e75;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding: 1rem;
   cursor: pointer;
+  background-color: rgba(30, 30, 117, 0.8);
+  border-radius: 8px;
+  margin-bottom: 0.5rem;
+}
+
+.expandedHeader {
+  margin-bottom: 1rem;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .dayHeader h3 {
@@ -182,18 +201,39 @@
 
 .dayDetails {
   padding: 0 1.5rem 1.5rem;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease-out, opacity 0.3s ease-out;
+  opacity: 0;
+}
+
+.expanded .dayDetails {
+  max-height: 1500px; /* Set this high enough to accommodate your content */
+  opacity: 1;
+  transition: max-height 0.5s ease-in, opacity 0.4s ease-in;
+  animation: slideDown 0.3s ease-out forwards;
+
+}
+
+.expandIcon {
+  color: #D9F103;
+  font-size: 12px;
+  transition: transform 0.3s ease;
 }
 
 .activityItem {
   display: flex;
   margin-bottom: 1.5rem;
   position: relative;
+  align-items: flex-start;
+  gap: 1rem;
 }
 
 .activityTime {
-  min-width: 80px;
+  min-width: 100px;
   font-weight: 500;
   color: #E7FF56;
+  padding-top: 0.5rem;
 }
 
 .activityContent {
@@ -542,4 +582,42 @@
   .itineraryActions {
     flex-direction: column;
   }
+}
+
+.costBreakdown {
+  background: #151566;
+  border-radius: 16px;
+  padding: 1.5rem 2rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+  color: #D9F103;
+}
+
+.costBreakdown h3 {
+  margin-top: 0;
+  margin-bottom: 1.2rem;
+  color: #D9F103;
+  text-align: center;
+}
+
+.costItem {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.8rem;
+  padding-bottom: 0.8rem;
+  border-bottom: 1px solid #252580;
+}
+
+.costItem:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+}
+
+.costLabel {
+  color: #CADF19;
+}
+
+.costValue {
+  font-weight: 600;
+  color: #E7FF56;
 }
