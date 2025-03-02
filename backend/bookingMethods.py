@@ -33,7 +33,7 @@ def getHotels(dest_id:str,arrival_date:str,departure_date:str):
 				"currency_code":"USD"}
 
 	response = requests.get(url, headers=headers, params=querystring)
-	# print(response.json())
+	print(response.json())
 	return response.json()
 
 def getTaxiDestination(destStr:str):

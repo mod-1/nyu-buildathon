@@ -54,9 +54,12 @@ def getItinerary():
     dest_id=getDestination(destQuery)
     # print(destQuery,dest_id)
     hotels=getHotels(dest_id=dest_id,arrival_date=arrival_date,departure_date=departure_date)["data"]["hotels"]
-    for hotel in hotels:
-        print(hotel["property"]["name"])
-    hotel=hotels[0]
+    hotel={}
+    for ht in hotels:
+        if "priceBreakdown" in ht["property"]:
+           hotel=ht
+           break
+    
     hotelName=hotel["property"]["name"]
     hotelPrice=hotel["property"]["priceBreakdown"]["grossPrice"]["value"]
     # print(f"Hotel selected: {hotel}")
