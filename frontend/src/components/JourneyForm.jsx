@@ -21,7 +21,7 @@ const JourneyForm = ({
   return (
     <div className="form-container">
       <h2>Your Journey Details</h2>
-      
+
       {!formSubmitted ? (
         <form className="modern-form">
           <LocationInput
@@ -31,14 +31,14 @@ const JourneyForm = ({
             locationError={locationError}
             getCurrentLocation={getCurrentLocation}
           />
-          
+
           <DateDurationInput
             startDate={startDate}
             setStartDate={setStartDate}
             tripDuration={tripDuration}
             setTripDuration={setTripDuration}
           />
-          
+
           <button type="submit" className="submit-button" onClick={handleSubmit}>
             Let's go
           </button>
@@ -48,6 +48,7 @@ const JourneyForm = ({
           travelType={travelType}
           onSelectType={handleTravelTypeSelect}
           tripDuration={tripDuration}
+          tripStartDate={startDate}
           startLocation={startLocation}
         />
       )}

@@ -1,0 +1,515 @@
+.itineraryContainer {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.itineraryHeader {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.itineraryHeader h1 {
+  font-size: 2.5rem;
+  color: #333;
+  margin-bottom: 0.5rem;
+}
+
+.tripDuration {
+  font-size: 1.1rem;
+  color: #666;
+}
+
+/* Tab Navigation */
+.tabNavigation {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 2rem;
+  border-bottom: 1px solid #eee;
+}
+
+.tabButton {
+  background: none;
+  border: none;
+  padding: 1rem 1.5rem;
+  font-size: 1rem;
+  cursor: pointer;
+  color: #666;
+  position: relative;
+  transition: color 0.3s;
+}
+
+.tabButton:hover {
+  color: #333;
+}
+
+.activeTab {
+  color: #646cff;
+  font-weight: 500;
+}
+
+.activeTab::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: #646cff;
+}
+
+/* Overview Tab */
+.tripCard {
+  background: white;
+  border-radius: 16px;
+  padding: 2rem;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+  margin-bottom: 2rem;
+}
+
+.tripSummary {
+  margin-bottom: 2rem;
+}
+
+.summaryDetails {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.summaryItem {
+  display: flex;
+  flex-direction: column;
+}
+
+.summaryLabel {
+  font-weight: 500;
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.tripHighlights h3 {
+  margin-bottom: 1rem;
+  color: #333;
+}
+
+.highlightsList {
+  list-style-type: none;
+  padding: 0;
+}
+
+.highlightItem {
+  padding: 0.7rem 0;
+  display: flex;
+  align-items: center;
+}
+
+.highlightIcon {
+  margin-right: 0.7rem;
+  color: #646cff;
+}
+
+.overviewMap {
+  margin-bottom: 2rem;
+}
+
+.mapPlaceholder {
+  height: 300px;
+  background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #666;
+}
+
+.viewDetailsButton {
+  display: block;
+  width: 100%;
+  padding: 1rem;
+  background: #646cff;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.viewDetailsButton:hover {
+  background: #535bf2;
+}
+
+/* Day by Day Tab */
+.dayCard {
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 1rem;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  transition: box-shadow 0.3s, transform 0.3s;
+}
+
+.dayCard.expanded {
+  box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+}
+
+.dayHeader {
+  padding: 1.5rem;
+  background: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+}
+
+.dayHeader h3 {
+  margin: 0;
+  color: #333;
+}
+
+.expandIcon {
+  color: #646cff;
+}
+
+.dayDetails {
+  padding: 0 1.5rem 1.5rem;
+}
+
+.activityItem {
+  display: flex;
+  margin-bottom: 1.5rem;
+  position: relative;
+}
+
+.activityTime {
+  min-width: 80px;
+  font-weight: 500;
+  color: #646cff;
+}
+
+.activityContent {
+  flex: 1;
+  background: #f9f9f9;
+  padding: 1rem;
+  border-radius: 8px;
+}
+
+.activityContent h4 {
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+}
+
+.activityActions {
+  display: flex;
+  margin-top: 1rem;
+}
+
+.editButton, .replaceButton {
+  background: none;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 0.4rem 0.8rem;
+  margin-right: 0.5rem;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background 0.2s;
+}
+
+.editButton:hover, .replaceButton:hover {
+  background: #f0f0f0;
+}
+
+.addActivityButton {
+  display: block;
+  width: fit-content;
+  margin: 1rem auto 0;
+  background: none;
+  border: 1px dashed #646cff;
+  color: #646cff;
+  padding: 0.6rem 1.2rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.addActivityButton:hover {
+  background: rgba(100, 108, 255, 0.05);
+}
+
+/* Flights Tab */
+.flightCard {
+  background: white;
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-bottom: 1rem;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+.flightHeader {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.flightAirline {
+  font-weight: 500;
+}
+
+.flightPrice {
+  font-weight: 700;
+  color: #646cff;
+}
+
+.flightRoute {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.departureTo, .arrivalTo {
+  text-align: center;
+}
+
+.airportCode {
+  font-weight: 700;
+  font-size: 1.2rem;
+}
+
+.flightDuration {
+  flex: 1;
+  position: relative;
+  margin: 0 1rem;
+}
+
+.durationLine {
+  height: 2px;
+  background: #ddd;
+  width: 100%;
+  position: relative;
+}
+
+.durationLine::after, .durationLine::before {
+  content: '•';
+  position: absolute;
+  color: #646cff;
+  top: -7px;
+}
+
+.durationLine::before {
+  left: -2px;
+}
+
+.durationLine::after {
+  right: -2px;
+}
+
+.durationTime {
+  text-align: center;
+  color: #666;
+  font-size: 0.9rem;
+  margin-top: 0.5rem;
+}
+
+.selectFlightButton {
+  display: block;
+  width: 100%;
+  padding: 0.8rem;
+  background: #646cff;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.selectFlightButton:hover {
+  background: #535bf2;
+}
+
+.noFlightsMessage {
+  text-align: center;
+  padding: 3rem;
+  background: #f9f9f9;
+  border-radius: 12px;
+  color: #666;
+}
+
+.searchFlightsButton {
+  margin-top: 1rem;
+  background: #646cff;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 0.8rem 1.5rem;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+/* Stay Tab */
+.hotelCard {
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+.hotelImage {
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+
+.hotelPrice {
+  position: absolute;
+  bottom: 1rem;
+  left: 1rem;
+  background: rgba(255, 255, 255, 0.9);
+  padding: 0.5rem 0.8rem;
+  border-radius: 6px;
+  font-weight: 700;
+}
+
+.hotelPrice span {
+  font-weight: normal;
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.hotelDetails {
+  padding: 1.5rem;
+}
+
+.hotelDetails h3 {
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+}
+
+.hotelRating {
+  color: #ffc107;
+  margin-bottom: 1rem;
+}
+
+.hotelAmenities {
+  margin-top: 1rem;
+}
+
+.amenityTag {
+  display: inline-block;
+  background: #f0f0f0;
+  padding: 0.3rem 0.7rem;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  margin: 0.25rem;
+}
+
+.viewHotelButton {
+  display: block;
+  margin-top: 1.5rem;
+  padding: 0.7rem 1.2rem;
+  background: none;
+  border: 1px solid #646cff;
+  color: #646cff;
+  font-weight: 500;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+
+.viewHotelButton:hover {
+  background: #646cff;
+  color: white;
+}
+
+.noHotelsMessage {
+  text-align: center;
+  padding: 3rem;
+  background: #f9f9f9;
+  border-radius: 12px;
+  color: #666;
+}
+
+.searchHotelsButton {
+  margin-top: 1rem;
+  background: #646cff;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 0.8rem 1.5rem;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+/* Footer actions */
+.itineraryActions {
+  display: flex;
+  justify-content: center;
+  margin-top: 3rem;
+  gap: 1rem;
+}
+
+.editItineraryButton, .saveItineraryButton, .shareItineraryButton {
+  padding: 0.8rem 1.5rem;
+  border-radius: 8px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.editItineraryButton {
+  background: none;
+  border: 1px solid #ddd;
+  color: #666;
+}
+
+.saveItineraryButton {
+  background: #646cff;
+  color: white;
+  border: none;
+}
+
+.shareItineraryButton {
+  background: #38b2ac;
+  color: white;
+  border: none;
+}
+
+.editItineraryButton:hover {
+  background: #f0f0f0;
+}
+
+.saveItineraryButton:hover {
+  background: #535bf2;
+}
+
+.shareItineraryButton:hover {
+  background: #319795;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .summaryDetails {
+    grid-template-columns: 1fr;
+  }
+  
+  .hotelCard {
+    grid-template-columns: 1fr;
+  }
+  
+  .hotelImage {
+    height: 200px;
+  }
+  
+  .itineraryActions {
+    flex-direction: column;
+  }
+}

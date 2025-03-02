@@ -12,7 +12,7 @@ const SelectionCard = ({ type, icon, label, onClick, imageClass, cardClass }) =>
   </div>
 );
 
-const TravelTypeSelector = ({ travelType, onSelectType, tripDuration, startLocation }) => {
+const TravelTypeSelector = ({ travelType, onSelectType, tripDuration, tripStartDate, startLocation }) => {
   const navigate = useNavigate();
 
   const [selectedVibe, setSelectedVibe] = useState(null);
@@ -119,6 +119,7 @@ const TravelTypeSelector = ({ travelType, onSelectType, tripDuration, startLocat
             vibe: selectedVibe,
             travelers: travelerType,
             duration: tripDuration,
+            startDate: tripStartDate,
             location: startLocation
           }
         }

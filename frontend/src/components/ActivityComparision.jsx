@@ -207,6 +207,7 @@ const ActivityComparison = () => {
                 location: primaryLocation,
                 activities: selectedActivities,
                 startLocation: tripDetails.location || '',
+                startDate: tripDetails.startDate || new Date().toISOString(),
                 days: tripDetails.duration || 3
             };
 
@@ -228,7 +229,7 @@ const ActivityComparison = () => {
             console.log('Generated itinerary:', itineraryData);
 
             // Navigate to results with both ranked activities and the generated itinerary
-            navigate('/activity-results', {
+            navigate('/show-itinerary', {
                 state: {
                     rankedActivities: sortedActivities,
                     tripDetails,
@@ -238,14 +239,6 @@ const ActivityComparison = () => {
             });
         } catch (error) {
             console.error('Error generating itinerary:', error);
-            // Still navigate but without the itinerary data
-            navigate('/activity-results', {
-                state: {
-                    rankedActivities: sortedActivities,
-                    tripDetails,
-                    error: 'Failed to generate itinerary. Please try again later.'
-                }
-            });
         } finally {
             setIsGeneratingItinerary(false);
         }
