@@ -14,6 +14,7 @@ def getDestination(dest:dict):
 	url = "https://booking-com15.p.rapidapi.com/api/v1/hotels/searchDestination"
 	querystring = {"query":dest}
 	response = requests.get(url, headers=headers, params=querystring)
+	response.json()["data"][0]
 	return response.json()["data"][0]["dest_id"]
 
 

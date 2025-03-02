@@ -52,11 +52,11 @@ def getItinerary():
     print(departureTime)
 
     dest_id=getDestination(destQuery)
+    print(destQuery,dest_id)
     hotel=getHotels(dest_id=dest_id,arrival_date=arrival_date,departure_date=departure_date)["data"]["hotels"][0]
     hotelName=hotel["property"]["name"]
     hotelPrice=hotel["property"]["priceBreakdown"]["grossPrice"]["value"]
-    print(f"Hotel selected: {hotel}")
-
+    # print(f"Hotel selected: {hotel}")
 
     dest_id = getTaxiDestination(airportLoc)["data"][0]["googlePlaceId"]
     src_id = getTaxiDestination(srcStr)["data"][0]["googlePlaceId"]
@@ -69,7 +69,7 @@ def getItinerary():
 
     taxiInfo=getTaxiInfo(src_id=src_id,dest_id=dest_id,pick_up_date=pick_up_date,pick_up_time=pick_up_time)["data"]["results"][0]
 
-    print(f"Taxi Info: {taxiInfo}")
+    # print(f"Taxi Info: {taxiInfo}")
     
     queryString=""
     if destStr:
@@ -144,7 +144,7 @@ def getTaxiDetails():
     departure_date: str -> Denotes departure date
     '''
     params = req.args.to_dict()
-    print(params)
+    # print(params)
     destStr = params["destination"]
     srcStr = params["source"]
 
