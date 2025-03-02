@@ -1,6 +1,7 @@
 from flask import Flask,request as req
 from claudeMethods import getItineryJson,getActivitiesJson
 from bookingMethods import getDestination,getHotels
+from airTravel import airTravel, getTravelDetails,getJSONdata,getAirportIDDetails
 import json
 from flask_cors import CORS
 
@@ -67,6 +68,7 @@ def getHotelsApi():
     hotel=getHotels(dest_id=dest_id,arrival_date=arrival_date,departure_date=departure_date)
     print(hotel)
     return json.dumps(hotel["data"]["hotels"][0])
+
 
 
 if __name__ == '__main__':
