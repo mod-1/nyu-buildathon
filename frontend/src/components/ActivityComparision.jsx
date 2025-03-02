@@ -209,7 +209,8 @@ const ActivityComparison = () => {
                 source: tripDetails.location || '',
                 startDate: tripDetails.startDate || new Date().toISOString(),
                 days: tripDetails.duration || 3,
-                startLocationCoordinates: tripDetails.startLocationCoordinates || { latitude: null, longitude: null }
+                startLocationCoordinates: tripDetails.startLocationCoordinates || { latitude: null, longitude: null },
+                travelerType: tripDetails.travelers || 'solo',
             };
 
             // Make the API call as POST
