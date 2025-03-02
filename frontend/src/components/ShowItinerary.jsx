@@ -44,7 +44,7 @@ const ShowItinerary = () => {
         price: hotelData.property.priceBreakdown.grossPrice.value,
         formattedPrice: `$${Math.round(hotelData.property.priceBreakdown.grossPrice.value)}`,
         taxes: `$${Math.round(hotelData.property.priceBreakdown.excludedPrice.value)}`,
-        originalPrice: `$${Math.round(hotelData.property.priceBreakdown.strikethroughPrice.value)}`,
+        originalPrice: `$${Math.round(hotelData.property.priceBreakdown.grossPrice.value)}`,
         image: hotelData.property.photoUrls[0],
         checkin: hotelData.property.checkin.fromTime,
         checkout: hotelData.property.checkout.untilTime,
