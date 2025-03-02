@@ -94,7 +94,7 @@ npm run dev
 ## Project Structure
 
 ```
-voyaghere/
+nyu-buildathon/
 ├── backend/
 │   ├── app.py
 │   ├── models/
@@ -115,14 +115,14 @@ voyaghere/
 
 ## Screenshots
 
-![Screenshot 1](path/to/screenshot1.png)
-![Screenshot 2](path/to/screenshot2.png)
+![Screenshot 1](frontend/src/assets/trip_planning.jpg)
+![Screenshot 2](frontend/src/assets/trip_summary.jpg)
 
 ## Contributors
 
-- [Your Name]
-- [Team Member 1]
-- [Team Member 2]
+- Divyansh Singh
+- Divyanshu Mathpal
+- Raj Priyadarshi
 
 ## License
 
