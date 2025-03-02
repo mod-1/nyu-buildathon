@@ -13,6 +13,7 @@ const ActivityComparison = () => {
     const [comparisonsCount, setComparisonsCount] = useState(0);
     const [comparisonsDone, setComparisonsDone] = useState(false);
     const [comparedPairs, setComparedPairs] = useState(new Set());
+    const [isGeneratingItinerary, setIsGeneratingItinerary] = useState(false);
 
     // Maximum comparisons we'll ask the user to make
     const MAX_COMPARISONS = Math.min(10, Object.keys(activities).length * 2); // Adjust as needed
@@ -136,7 +137,8 @@ const ActivityComparison = () => {
     };
 
     // Show the results screen with sorted activities by ELO rating
-    const navigateToResults = () => {
+    // Update the navigateToResults function to call the API
+    const navigateToResults = async () => {
         // Sort activities by their ELO rating
         const sortedActivities = Object.entries(rankings)
             .sort((a, b) => b[1] - a[1]) // Sort by score descending
@@ -150,12 +152,103 @@ const ActivityComparison = () => {
 
         console.log('Ranked activities:', sortedActivities);
 
-        navigate('/activity-results', {
-            state: {
-                rankedActivities: sortedActivities,
-                tripDetails
+        // Get top activities for voting
+        const topActivities = sortedActivities.slice(0, 5); // Consider top 5 for better consensus
+
+        // Count activities by location to find the consensus
+        const locationCounts = {};
+        topActivities.forEach(activity => {
+            locationCounts[activity.location] = (locationCounts[activity.location] || 0) + 1;
+        });
+
+        console.log('Location counts from top activities:', locationCounts);
+
+        // Find the location(s) with the most votes
+        let maxCount = 0;
+        let topLocations = [];
+        Object.entries(locationCounts).forEach(([loc, count]) => {
+            if (count > maxCount) {
+                maxCount = count;
+                topLocations = [loc];
+            } else if (count === maxCount) {
+                topLocations.push(loc);
             }
         });
+
+        // Determine the primary location:
+        // If there's a clear winner, use that location
+        // If there's a tie, use the location of the highest-rated activity
+        let primaryLocation;
+        if (topLocations.length === 1) {
+            primaryLocation = topLocations[0];
+        } else {
+            // There's a tie, find the highest-rated activity among the tied locations
+            primaryLocation = topActivities.find(activity =>
+                topLocations.includes(activity.location)
+            ).location;
+        }
+
+        console.log('Selected primary location:', primaryLocation);
+
+        // Get all activities for the selected location
+        const activitiesInPrimaryLocation = sortedActivities.filter(
+            activity => activity.location === primaryLocation
+        );
+
+        // Extract just the activity text to send to the API
+        const selectedActivities = activitiesInPrimaryLocation.map(activity => activity.text);
+
+        try {
+            // Show loading state
+            setIsGeneratingItinerary(true);
+
+            // Create the request data object
+            const itineraryRequestData = {
+                location: primaryLocation,
+                activities: selectedActivities,
+                startLocation: tripDetails.location || '',
+                days: tripDetails.duration || 3
+            };
+
+            // Make the API call as POST
+            const response = await fetch(`/claude/generateItinerary`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json',
+                },
+                body: JSON.stringify(itineraryRequestData)
+            });
+
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+
+            const itineraryData = await response.json();
+            console.log('Generated itinerary:', itineraryData);
+
+            // Navigate to results with both ranked activities and the generated itinerary
+            navigate('/activity-results', {
+                state: {
+                    rankedActivities: sortedActivities,
+                    tripDetails,
+                    itinerary: itineraryData,
+                    selectedLocation: primaryLocation
+                }
+            });
+        } catch (error) {
+            console.error('Error generating itinerary:', error);
+            // Still navigate but without the itinerary data
+            navigate('/activity-results', {
+                state: {
+                    rankedActivities: sortedActivities,
+                    tripDetails,
+                    error: 'Failed to generate itinerary. Please try again later.'
+                }
+            });
+        } finally {
+            setIsGeneratingItinerary(false);
+        }
     };
 
     // Helper function to categorize activity strength
@@ -167,19 +260,26 @@ const ActivityComparison = () => {
         return 'poor';
     };
 
-    // Show the results screen after comparisons are done
+    // Then update the results screen to show loading state when generating itinerary
     if (comparisonsDone) {
         return (
             <div className={styles.comparisonContainer}>
                 <h2>Thanks for your input!</h2>
                 <p className={styles.subtitle}>We've analyzed your preferences</p>
 
-                <button
-                    className={styles.continueButton}
-                    onClick={navigateToResults}
-                >
-                    See Your Personalized Itinerary
-                </button>
+                {isGeneratingItinerary ? (
+                    <div className={styles.loadingContainer}>
+                        <p>Generating your personalized itinerary...</p>
+                        <div className={styles.spinner}></div>
+                    </div>
+                ) : (
+                    <button
+                        className={styles.continueButton}
+                        onClick={navigateToResults}
+                    >
+                        See Your Personalized Itinerary
+                    </button>
+                )}
             </div>
         );
     }
