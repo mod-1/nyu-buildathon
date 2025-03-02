@@ -1,5 +1,6 @@
 from flask import Flask,request as req
 from claudeMethods import getItineryJson,getActivitiesJson
+from bookingMethods import getDestination,getHotels
 import json
 from flask_cors import CORS
 
@@ -50,21 +51,22 @@ def getActivities():
     return json.dumps(getActivitiesJson(queryString))
 
 @app.route('/hotels/filterHotels')
-def getHotels():
+def getHotelsApi():
     '''
     params:
-    category: str -> Denotes the category from (hotel, homestay, villa, resort)
-
+    destination: str -> Denotes destination
 
     '''
-    querystring = {"query":"Gulmarg"}
+    params = req.args.to_dict()
+    destQuery = {"query":params["destination"]}
 
-    querystring = {
-        "dest_id":"-2092174",
-        "search_type":"CITY",
-        "arrival_date":
-        "2025-03-04","departure_date":"2025-03-20","adults":"1","children_age":"0,17","room_qty":"1","page_number":"1","sort_by":"price","categories_filter":"hotel","units":"metric","temperature_unit":"c","languagecode":"en-us","currency_code":"USD"}
+    dest_id=getDestination(destQuery)
+    arrival_date = params["arrival_date"]
+    departure_date = params["departure_date"]
 
+    hotel=getHotels(dest_id=dest_id,arrival_date=arrival_date,departure_date=departure_date)
+    print(hotel)
+    return json.dumps(hotel["data"]["hotels"][0])
 
 
 if __name__ == '__main__':

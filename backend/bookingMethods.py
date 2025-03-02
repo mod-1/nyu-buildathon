@@ -5,31 +5,35 @@ import os
 dotenv.load_dotenv()
 
 api_key = os.getenv("BOOKING_API_KEY")
-
-def getDestination(queryStr:str):
-url = "https://booking-com15.p.rapidapi.com/api/v1/hotels/searchDestination"
-
-querystring = {"query":"Gulmarg"}
-
 headers = {
-	"x-rapidapi-key": "b8c58f9d67msh909dd3e43316b91p1378dcjsn7265606eed9b",
-	"x-rapidapi-host": "booking-com15.p.rapidapi.com"
+		"x-rapidapi-key": api_key,
+		"x-rapidapi-host": "booking-com15.p.rapidapi.com"
 }
 
-response = requests.get(url, headers=headers, params=querystring)
+def getDestination(dest:dict):
+	url = "https://booking-com15.p.rapidapi.com/api/v1/hotels/searchDestination"
 
-print(response.json())
+	querystring = {"query":dest}
+
+	response = requests.get(url, headers=headers, params=querystring)
+
+	return response.json()["data"][0]["dest_id"]
 
 
-url = "https://booking-com15.p.rapidapi.com/api/v1/hotels/searchHotels"
+def getHotels(dest_id:str,arrival_date:str,departure_date:str):
+	url = "https://booking-com15.p.rapidapi.com/api/v1/hotels/searchHotels"
 
-querystring = {"dest_id":"-2092174","search_type":"CITY","adults":"1","children_age":"0,17","room_qty":"1","page_number":"1","units":"metric","temperature_unit":"c","languagecode":"en-us","currency_code":"AED"}
+	querystring = {"dest_id":dest_id,
+				"search_type":"CITY",
+				"arrival_date":arrival_date,
+				"departure_date":departure_date,
+				"adults":"1",
+				"room_qty":"1",
+				"page_number":"1",
+				"units":"metric",
+				"sort_by":"price",
+				"languagecode":"en-us","currency_code":"USD"}
 
-headers = {
-	"x-rapidapi-key": api_key,
-	"x-rapidapi-host": "booking-com15.p.rapidapi.com"
-}
+	response = requests.get(url, headers=headers, params=querystring)
 
-response = requests.get(url, headers=headers, params=querystring)
-
-print(response.json())
+	return response.json()
