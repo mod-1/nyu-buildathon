@@ -42,7 +42,7 @@ def getItinerary():
     flightInfo=airTravel(originAirport=srcStr, destinationAirport=destStr, date=arrival_date)
     print(flightInfo.keys())
     print(f"Flight Info: {flightInfo}")
-    airportLoc=f"{flightInfo["legs"][0]["origin"]} Airport"
+    airportLoc=f"{flightInfo['legs'][0]['origin']} Airport"
     departureTime = datetime.strptime(flightInfo["legs"][0]["departure"], "%Y-%m-%dT%H:%M:%S")
     print(departureTime)
 
