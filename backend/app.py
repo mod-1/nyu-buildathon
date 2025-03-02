@@ -68,7 +68,7 @@ def getItinerary():
     queryString=""
     queryString += f"I want to visit {destStr} for {days} days.\n"
     # queryString += f"I am travelling {params['travellingWith']}.\n"
-    queryString += f"I want to stay in {params['stayType']}.\n"
+    # queryString += f"I want to stay in {params['stayType']}.\n"
     queryString += f"I would love to do the following activities in my trip: {activities}\n"
     queryString += f"I would like to go tomorrow. Could you give me a day wise itinery for with approxmiate time\n. Please return the itinery in json format"
 

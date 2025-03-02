@@ -1,86 +1,64 @@
-import http.client
 import json
-
 import requests
 import dotenv
 import os
 
 dotenv.load_dotenv()
 
-
-api_key= os.getenv("AIR_TRAVEL_API")
+api_key = os.getenv("AIR_TRAVEL_API")
 headers = {
     'x-rapidapi-key': api_key,
-    #  
-    # The above is the API key in case things don't work
     'x-rapidapi-host': "sky-scrapper.p.rapidapi.com"
 }
 
-
 def getAirportIDDetails(nameOfTheAirport):
-    nameOfTheAirport= nameOfTheAirport.replace(' ','')
-    conn = http.client.HTTPSConnection("sky-scrapper.p.rapidapi.com")
+    url = "https://sky-scrapper.p.rapidapi.com/api/v1/flights/searchAirport"
+    params = {
+        "query": nameOfTheAirport,
+        "locale": "en-US"
+    }
     
+    response = requests.get(url, headers=headers, params=params)
+    json_data = response.json()
     
-    url= "/api/v1/flights/searchAirport?query="+str(nameOfTheAirport)+"&locale=en-US"
-    ##url= url.strip
-    ##url= url.replace(' ','')
-    #print(url)
-    conn.request("GET", "/api/v1/flights/searchAirport?query="+str(nameOfTheAirport)+"&locale=en-US", headers=headers)
-    
-    res = conn.getresponse()
-    data = res.read()
-    json_data= json.loads(data)
-    #print(data.decode("utf-8"))
-    #print("ttttttttttttttttttttttttt")
-    #print(json_data)
-    return json_data
-    
-    
-def getJSONdata(originSkyId="LOND",destinationSkyId="NYCA",date='2025-03-21',originEntityId="27544008",destinationEntityId="27537542",cabinClass="economy",adults=1,sortBy='best'):
-    conn = http.client.HTTPSConnection("sky-scrapper.p.rapidapi.com")
-    
-    
-    
-    
-    url = "/api/v2/flights/searchFlights?originSkyId=" + originSkyId +"&destinationSkyId=" + destinationSkyId + "&date=" + date +"&originEntityId=" + originEntityId + "&destinationEntityId=" + destinationEntityId + "&cabinClass=" + cabinClass + "&adults=" + str(adults) +"&sortBy=" + sortBy +"&currency=USD&market=en-US&countryCode=US"
-    url=url.replace(" ","")
-    conn.request("GET", url, headers=headers)
-
-    #print("URL is " +url)
-
-    
-    res = conn.getresponse()
-    data = res.read()
-    json_data= json.loads(data)
-    #print(data)    
-    ##print(data.decode("utf-8"))
     return json_data
 
-def getTravelDetails(originAirport="London", destinationAirport="New York", date='2025-04-25',cabinClass="economy",adults='1',sortBy="price_high"):
-    dorg= getAirportIDDetails(originAirport)
-    ddes= getAirportIDDetails(destinationAirport)
-    relevantFlightParams_org=dorg['data']
-    relevantFlightParams_des=ddes['data']
-    #print(relevantFlightParams_org)
-    #print(relevantFlightParams_des)
-    #originSkyId,destinationSkyId,date,originEntityId,destinationEntityId,cabinClass,adults=1,sortBy='best'
-    print(dorg,ddes)
-    originSkyId=      relevantFlightParams_org[0]["skyId"]
-    destinationSkyId= relevantFlightParams_des[0]["skyId"]
-    originEntityId=   relevantFlightParams_org[0]["entityId"]
-    destinationEntityId= relevantFlightParams_des[0]["entityId"]
-    ##time.sleep(2)
-    #print("YYYYYYYYYYYYYYYYYYYYYYY")
-    #print(originSkyId,destinationSkyId,date,originEntityId,destinationEntityId,cabinClass,adults)
-    #print("XXXXXXXXXXXXXXXXXXXXXXXX")
+def getJSONdata(originSkyId="LOND", destinationSkyId="NYCA", date='2025-03-21', originEntityId="27544008", destinationEntityId="27537542", cabinClass="economy", adults=1, sortBy='best'):
+    url = "https://sky-scrapper.p.rapidapi.com/api/v2/flights/searchFlights"
+    params = {
+        "originSkyId": originSkyId,
+        "destinationSkyId": destinationSkyId,
+        "date": date,
+        "originEntityId": originEntityId,
+        "destinationEntityId": destinationEntityId,
+        "cabinClass": cabinClass,
+        "adults": str(adults),
+        "sortBy": sortBy,
+        "currency": "USD",
+        "market": "en-US",
+        "countryCode": "US"
+    }
     
-    z1=getJSONdata(originSkyId,destinationSkyId,date,originEntityId,destinationEntityId,cabinClass,adults)
+    response = requests.get(url, headers=headers, params=params)
+    json_data = response.json()
+    
+    return json_data
 
+def getTravelDetails(originAirport="London", destinationAirport="New York", date='2025-04-25', cabinClass="economy", adults='1', sortBy="price_high"):
+    dorg = getAirportIDDetails(originAirport)
+    ddes = getAirportIDDetails(destinationAirport)
+    relevantFlightParams_org = dorg['data']
+    relevantFlightParams_des = ddes['data']
+    
+    originSkyId = relevantFlightParams_org[0]["skyId"]
+    destinationSkyId = relevantFlightParams_des[0]["skyId"]
+    originEntityId = relevantFlightParams_org[0]["entityId"]
+    destinationEntityId = relevantFlightParams_des[0]["entityId"]
+    
+    z1 = getJSONdata(originSkyId, destinationSkyId, date, originEntityId, destinationEntityId, cabinClass, adults)
+    
     return z1
 
-def airTravel(originAirport="London", destinationAirport="New York", date='2025-05-25',cabinClass="economy",adults='1',sortBy="price_high",k_value=0):
-    ans= getTravelDetails(originAirport,destinationAirport,date,cabinClass,adults,sortBy)
+def airTravel(originAirport="London", destinationAirport="New York", date='2025-05-25', cabinClass="economy", adults='1', sortBy="price_high", k_value=0):
+    ans = getTravelDetails(originAirport, destinationAirport, date, cabinClass, adults, sortBy)
     return ans['data']['itineraries'][k_value]
-
-
