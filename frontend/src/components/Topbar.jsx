@@ -16,7 +16,7 @@ const Topbar = ({ resetAppState }) => {
   return (
     <div className="topbar">
       <div className="logo" onClick={handleLogoClick} style={{ cursor: 'pointer' }}>
-        TravelApp
+        VoyagHere
       </div>
       <div className="profile">
         <div className="avatar"></div>

@@ -5,6 +5,7 @@ import Topbar from './components/Topbar'
 import LandingPage from './components/LandingPage'
 import JourneyForm from './components/JourneyForm'
 import ActivityComparison from "./components/ActivityComparision"
+import ShowItinerary from './components/ShowItinerary';
 import { getCurrentLocationFromAPI } from './services/locationService'
 
 function App() {
@@ -105,6 +106,7 @@ function App() {
               path="/activity-comparison"
               element={<ActivityComparison />}
             />
+            <Route path="/show-itinerary" element={<ShowItinerary />} />
           </Routes>
         </div>
       </div>

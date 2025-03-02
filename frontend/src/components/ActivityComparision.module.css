@@ -24,7 +24,7 @@
   box-shadow: 0 8px 30px rgba(0,0,0,0.12);
   cursor: pointer;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-  height: 100%;
+  height: auto;
   display: flex;
   flex-direction: column;
 }
@@ -98,9 +98,11 @@
 }
 
 .skipText {
-  margin-top: 1.5rem;
+  margin-top: 2rem;
+  text-align: center;
   color: #777;
   font-size: 14px;
+  clear: both;  /* Prevents overlap with floating elements */
 }
 
 .progressBar {
