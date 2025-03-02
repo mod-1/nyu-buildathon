@@ -22,8 +22,10 @@ def getCountryImage():
 def getItinerary():
     '''
     params:
-    country: str -> Denotes wheter the user wants to visit a specific country or anywhere is fine.
-    days: str => Number of days the user wants to travel in string.
+    country: str -> Denotes country
+    days: str -> Denotes number of days
+    travellingWith: str -> Denotes who the user is travelling with
+    placeType: str -> Denotes type of place
     '''
     params = req.args.to_dict()
     queryString=""
@@ -41,6 +43,7 @@ def getActivities():
     params:
     country: str -> Denotes wheter the user wants to visit a specific country or anywhere is fine.
     days: str => Number of days the user wants to travel in string.
+
     '''
     params = req.args.to_dict()
     queryString=""
@@ -56,6 +59,8 @@ def getHotelsApi():
     '''
     params:
     destination: str -> Denotes destination
+    arrival_date: str -> Denotes arrival date
+    departure_date: str -> Denotes departure date
 
     '''
     params = req.args.to_dict()
@@ -68,6 +73,31 @@ def getHotelsApi():
     hotel=getHotels(dest_id=dest_id,arrival_date=arrival_date,departure_date=departure_date)
     print(hotel)
     return json.dumps(hotel["data"]["hotels"][0])
+
+@app.route('/taxi/getTaxiDetails')
+def getTaxiDetails():
+    '''
+    params:
+    source: str -> Denotes source string
+    destination: str -> Denotes destination string
+    arrival_date: str -> Denotes arrival date
+    departure_date: str -> Denotes departure date
+    '''
+    params = req.args.to_dict()
+    print(params)
+    destStr = params["destination"]
+    srcStr = params["source"]
+
+    dest_id = getTaxiDestination(destStr)["data"][0]["googlePlaceId"]
+    src_id = getTaxiDestination(srcStr)["data"][0]["googlePlaceId"]
+
+    print(dest_id,src_id)
+    pick_up_date = params["pick_up_date"]
+    pick_up_time = params["pick_up_time"]
+
+    taxiInfo=getTaxiInfo(src_id=src_id,dest_id=dest_id,pick_up_date=pick_up_date,pick_up_time=pick_up_time)["data"]["results"][0]
+
+    return json.dumps(taxiInfo)
 
 
 
