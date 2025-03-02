@@ -126,18 +126,9 @@ def getItineryJson(queryStr:str):
             // Daily activities
             "activities": {
                 "1": {
-                "title": "Arrival and check-in",
-                "activities": [
-                    // Format option 1: Strings with time and description
-                    "15:44 - Arrive at Miami International Airport",
-                    "16:30 - Check-in at accommodation",
-                    "19:00 - Dinner at Ocean Drive"
-                ]
-                },
-                "2": {
+                "number": "1",
                 "title": "Highlight of the day",
                 "activities": [
-                    // Format option 2: Objects with time and description
                     {
                     "time": "08:00",
                     "description": "Breakfast at the accommodation"
