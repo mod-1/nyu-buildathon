@@ -44,11 +44,17 @@ def getItinerary():
     print(f"Flight Info: {flightInfo}")
     airportLoc=f"{flightInfo['legs'][0]['origin']} Airport"
     departureTime = datetime.strptime(flightInfo["legs"][0]["departure"], "%Y-%m-%dT%H:%M:%S")
+    arrivalTime=datetime.strptime(flightInfo["legs"][-1]["arrival"], "%Y-%m-%dT%H:%M:%S")
+    durationInMin=0
+    for leg in flightInfo["legs"]:
+        durationInMin+=leg["durationInMinutes"]
+
     print(departureTime)
 
     dest_id=getDestination(destQuery)
     hotel=getHotels(dest_id=dest_id,arrival_date=arrival_date,departure_date=departure_date)["data"]["hotels"][0]
-
+    hotelName=hotel["property"]["name"]
+    hotelPrice=hotel["property"]["priceBreakdown"]["grossPrice"]["value"]
     print(f"Hotel selected: {hotel}")
 
 
@@ -66,11 +72,23 @@ def getItinerary():
     print(f"Taxi Info: {taxiInfo}")
     
     queryString=""
-    queryString += f"I want to visit {destStr} for {days} days.\n"
-    # queryString += f"I am travelling {params['travellingWith']}.\n"
-    # queryString += f"I want to stay in {params['stayType']}.\n"
-    queryString += f"I would love to do the following activities in my trip: {activities}\n"
-    queryString += f"I would like to go tomorrow. Could you give me a day wise itinery for with approxmiate time\n. Please return the itinery in json format"
+    if destStr:
+        queryString += f"I want to visit {destStr} for {days} days starting from\n"
+    if departureTime:
+        queryString += f"My flight is at {departureTime.strftime('%H:%M')} and my cab will reach home at {pick_up_time}.\n"
+    if hotelName and hotelPrice:
+        queryString += f"I will be staying at {hotelName} and the cost of the stay is {hotelPrice}.\n"
+    if durationInMin:
+        queryString += f"My flight is of {durationInMin} minutes.\n"
+    if arrivalTime:
+        queryString += f"I will be arriving in {destStr} at {arrivalTime.strftime('%H:%M')}.\n"
+    if 'travelerType' in params:
+        queryString += f"I am travelling {params['travelerType']}.\n"
+    # if 'stayType' in params:
+    #     queryString += f"I want to stay in {params['stayType']}.\n"
+    if activities:
+        queryString += f"I would love to do the following activities in my trip: {activities}\n"
+    queryString += "Could you give me a day wise itinerary with approximate time. Please return the itinerary in JSON format."
 
     return json.dumps(getItineryJson(queryString))
 

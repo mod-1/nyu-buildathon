@@ -29,7 +29,8 @@ def getHotels(dest_id:str,arrival_date:str,departure_date:str):
 				"page_number":"1",
 				"units":"metric",
 				"sort_by":"price",
-				"languagecode":"en-us","currency_code":"USD"}
+				"languagecode":"en-us",
+				"currency_code":"USD"}
 
 	response = requests.get(url, headers=headers, params=querystring)
 	# print(response.json())
