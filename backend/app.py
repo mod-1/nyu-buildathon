@@ -91,7 +91,7 @@ def getItinerary():
     queryString += "Could you give me a day wise itinerary with approximate time. Please return the itinerary in JSON format."
 
     outputJson={}
-    outputJson["activities"]=getActivitiesJson(queryString)
+    outputJson["activities"]=getItineryJson(queryString)
     outputJson["flight"]=flightInfo
     outputJson["hotel"]=hotel
     outputJson["taxi"]=taxiInfo

@@ -46,7 +46,7 @@ def getJSONdata(originSkyId="LOND", destinationSkyId="NYCA", date='2025-03-21', 
 
 def getTravelDetails(originAirport="London", destinationAirport="New York", date='2025-04-25', cabinClass="economy", adults='1', sortBy="price_high"):
     dorg = getAirportIDDetails(originAirport)
-    ddes = getAirportIDDetails(destinationAirport[:6])
+    ddes = getAirportIDDetails(destinationAirport.split(',')[0])
     relevantFlightParams_org = dorg['data']
     relevantFlightParams_des = ddes['data']
     originSkyId = relevantFlightParams_org[0]["skyId"]
