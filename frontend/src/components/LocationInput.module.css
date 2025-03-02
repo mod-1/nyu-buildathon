@@ -3,11 +3,12 @@
     flex-direction: column;
     text-align: left;
     gap: 0.5rem;
+    font-family: 'Playfair Display', serif;
 }
 
 .formGroup label {
     font-size: 0.9rem;
-    color: #a0a0a0;
+    color: #CADF19; /* Changed to lighter yellow-green */
 }
 
 .locationInputGroup {
@@ -19,19 +20,19 @@
     flex: 1;
     padding: 0.8rem;
     border-radius: 8px;
-    border: 1px solid #333;
-    background-color: #2a2a2a;
-    color: white;
+    border: 1px solid #252580;
+    background-color: #1e1e75; /* Changed to lighter blue */
+    color: #E7FF56; /* Changed to lighter yellow-green */
     transition: border-color 0.3s ease;
 }
 
 .locationInputGroup input:focus {
-    border-color: #646cff;
+    border-color: #D9F103; /* Changed to neon yellow-green */
     outline: none;
 }
 
 .locationButton {
-    background-color: #535bf2;
+    background-color: #D9F103; /* Changed to neon yellow-green */
     border: none;
     border-radius: 8px;
     width: 40px;
@@ -43,21 +44,22 @@
 }
 
 .locationButton:hover {
-    background-color: #646cff;
+    background-color: #E7FF56; /* Changed to lighter yellow-green */
 }
 
 .locationIcon {
     font-size: 1.2rem;
+    color: #0D0D55; /* Dark blue icon color */
 }
 
 .errorText {
-    color: #ff6b6b;
+    color: #FF9F45; /* Changed to orange-yellow that works with theme */
     font-size: 0.8rem;
     margin-top: 0.5rem;
 }
 
 .loadingText {
-    color: #a0a0a0;
+    color: #CADF19; /* Changed to lighter yellow-green */
     font-size: 0.8rem;
     margin-top: 0.5rem;
 }

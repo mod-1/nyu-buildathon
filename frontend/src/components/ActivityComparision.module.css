@@ -3,10 +3,15 @@
   margin: 0 auto;
   padding: 2rem 1rem;
   text-align: center;
+  font-family: 'Playfair Display', serif;
+}
+
+.comparisonContainer h2 {
+  color: #D9F103;
 }
 
 .subtitle {
-  color: #777;
+  color: #CADF19;
   margin-bottom: 2rem;
 }
 
@@ -18,60 +23,66 @@
 }
 
 .activityTile {
-  background: white;
+  background: #151566; /* Changed from white to dark blue */
   border-radius: 16px;
   padding: 1.5rem;
-  box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+  box-shadow: 0 8px 30px rgba(0,0,0,0.3);
   cursor: pointer;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-  height: auto;
+  height: 350px; /* Fixed height instead of auto */
   display: flex;
   flex-direction: column;
+  overflow: hidden; /* Prevent content from overflowing */
+  border: 1px solid transparent; /* Add border to prevent layout shift on hover */
 }
 
 .activityTile:hover {
   transform: translateY(-5px);
-  box-shadow: 0 12px 40px rgba(0,0,0,0.15);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.4);
+  border: 1px solid rgba(217, 241, 3, 0.3);
 }
 
 .activityImage {
-  height: 200px;
-  background: linear-gradient(135deg, #6e8efb, #a777e3);
+  height: 180px; /* Fixed height */
+  min-height: 180px; /* Ensure minimum height */
+  background: linear-gradient(135deg, #1e1e75, #252580); /* Updated gradient */
   border-radius: 12px;
   margin-bottom: 1.5rem;
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-shrink: 0; /* Prevent image from shrinking */
 }
 
 .activityIcon {
   font-size: 4rem;
+  color: #D9F103; /* Added color */
 }
 
 .activityTile h3 {
   margin-bottom: 1rem;
-  color: #333;
+  color: #D9F103; /* Changed from #333 */
 }
 
 .activityTile p {
-  color: #666;
+  color: #CADF19; /* Changed from #666 */
   flex-grow: 1;
 }
 
 .regenerateButton {
-  background: #f1f1f1;
+  background: #1e1e75; /* Changed from #f1f1f1 */
   border: none;
   padding: 0.8rem 1.5rem;
   font-size: 1rem;
   border-radius: 8px;
   cursor: pointer;
-  color: #555;
+  color: #D9F103; /* Changed from #555 */
   margin-top: 2rem;
   transition: background-color 0.2s ease;
 }
 
 .regenerateButton:hover {
-  background: #e0e0e0;
+  background: #252580; /* Changed from #e0e0e0 */
 }
 
 @media (max-width: 768px) {
@@ -81,8 +92,8 @@
 }
 
 .continueButton {
-  background: #646cff;
-  color: white;
+  background: #D9F103; /* Changed from #646cff */
+  color: #0D0D55; /* Changed to dark blue */
   font-weight: 500;
   padding: 12px 24px;
   border-radius: 8px;
@@ -91,24 +102,25 @@
   font-size: 16px;
   transition: background-color 0.3s;
   margin-top: 2rem;
+  font-family: 'Playfair Display', serif;
 }
 
 .continueButton:hover {
-  background: #535bf2;
+  background: #E7FF56; /* Changed from #535bf2 */
 }
 
 .skipText {
   margin-top: 2rem;
   text-align: center;
-  color: #777;
+  color: #CADF19; /* Changed from #777 */
   font-size: 14px;
-  clear: both;  /* Prevents overlap with floating elements */
+  clear: both;
 }
 
 .progressBar {
   width: 100%;
   height: 8px;
-  background: #eee;
+  background: #080836; /* Changed from #eee to darker blue */
   border-radius: 4px;
   margin: 1.5rem 0;
   overflow: hidden;
@@ -116,6 +128,29 @@
 
 .progressFill {
   height: 100%;
-  background: #646cff;
+  background: #D9F103; /* Changed from #646cff to yellow/green */
   transition: width 0.3s ease;
+}
+
+/* Add styles for loading */
+.loadingContainer {
+  text-align: center;
+  margin: 2rem 0;
+}
+
+.spinner {
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  border: 4px solid rgba(217, 241, 3, 0.3);
+  border-radius: 50%;
+  border-top-color: #D9F103;
+  animation: spin 1s linear infinite;
+  margin-top: 1rem;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
 }
