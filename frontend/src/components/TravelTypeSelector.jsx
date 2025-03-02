@@ -68,6 +68,7 @@ const TravelTypeSelector = ({ travelType, onSelectType, tripDuration, tripStartD
 
         // Parse location in format "city; country"
         const parts = location.split(';');
+        console.log("city; country", parts)
         if (parts.length >= 2) {
           // Get country part and trim whitespace
           const country = parts[1].trim();
@@ -76,6 +77,22 @@ const TravelTypeSelector = ({ travelType, onSelectType, tripDuration, tripStartD
 
         // Fallback if format is not as expected
         return 'the United States';
+      }
+
+      function extractCity(location) {
+        if (!location) return 'the United States'; // Default fallback
+
+        // Parse location in format "city; country"
+        const parts = location.split(';');
+        console.log("city; country", parts)
+        if (parts.length >= 1) {
+          // Get country part and trim whitespace
+          const city = parts[0].trim();
+          return city;
+        }
+
+        // Fallback if format is not as expected
+        return 'New York';
       }
       // Original data for debugging
       const tripData = {
@@ -119,7 +136,7 @@ const TravelTypeSelector = ({ travelType, onSelectType, tripDuration, tripStartD
             travelers: travelerType,
             duration: tripDuration,
             startDate: tripStartDate,
-            location: startLocation,
+            location: extractCity(startLocation),
             startLocationCoordinates: startLocationCoordinates
           }
         }
