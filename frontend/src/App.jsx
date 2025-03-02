@@ -17,6 +17,7 @@ function App() {
   const [locationError, setLocationError] = useState('')
   const [formSubmitted, setFormSubmitted] = useState(false)
   const [travelType, setTravelType] = useState(null)
+  const [coordinates, setCoordinates] = useState({ latitude: null, longitude: null })
 
   const resetAppState = () => {
     setStarted(false);
@@ -27,6 +28,7 @@ function App() {
     setLocationError('');
     setFormSubmitted(false);
     setTravelType(null);
+    setCoordinates({ latitude: null, longitude: null });
   }
 
   // Function to get current location using browser's Geolocation API
@@ -43,12 +45,17 @@ function App() {
     navigator.geolocation.getCurrentPosition(
       async (position) => {
         try {
-          const formattedLocation = await getCurrentLocationFromAPI(position)
+          const { formattedLocation, coordinates } = await getCurrentLocationFromAPI(position)
           setStartLocation(formattedLocation)
+          setCoordinates(coordinates)
           setIsLoadingLocation(false)
         } catch (error) {
           console.error("Error fetching location:", error)
           setStartLocation(`${position.coords.latitude}, ${position.coords.longitude}`)
+          setCoordinates({
+            latitude: position.coords.latitude,
+            longitude: position.coords.longitude
+          })
           setIsLoadingLocation(false)
         }
       },
@@ -92,6 +99,7 @@ function App() {
                   setStartDate={setStartDate}
                   tripDuration={tripDuration}
                   setTripDuration={setTripDuration}
+                  coordinates={coordinates}
                   isLoadingLocation={isLoadingLocation}
                   locationError={locationError}
                   getCurrentLocation={getCurrentLocation}

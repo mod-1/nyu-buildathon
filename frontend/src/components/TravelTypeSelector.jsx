@@ -12,7 +12,7 @@ const SelectionCard = ({ type, icon, label, onClick, imageClass, cardClass }) =>
   </div>
 );
 
-const TravelTypeSelector = ({ travelType, onSelectType, tripDuration, tripStartDate, startLocation }) => {
+const TravelTypeSelector = ({ travelType, onSelectType, tripDuration, tripStartDate, startLocation, startLocationCoordinates }) => {
   const navigate = useNavigate();
 
   const [selectedVibe, setSelectedVibe] = useState(null);
@@ -95,7 +95,6 @@ const TravelTypeSelector = ({ travelType, onSelectType, tripDuration, tripStartD
         headers: {
           'Accept': 'application/json',
         }
-        // No body in GET requests
       });
 
       if (!response.ok) {
@@ -120,7 +119,8 @@ const TravelTypeSelector = ({ travelType, onSelectType, tripDuration, tripStartD
             travelers: travelerType,
             duration: tripDuration,
             startDate: tripStartDate,
-            location: startLocation
+            location: startLocation,
+            startLocationCoordinates: startLocationCoordinates
           }
         }
       });

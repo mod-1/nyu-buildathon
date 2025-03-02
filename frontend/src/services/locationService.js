@@ -6,22 +6,41 @@ const getCurrentLocationFromAPI = async (position) => {
         )
         const data = await response.json()
 
+        let formattedLocation = ''
+
         if (data && data.localityInfo) {
             // Format the location based on available data
             const city = data.city || ''
             const countryName = data.countryName || ''
 
-            let formattedLocation = [city, countryName]
+            formattedLocation = [city, countryName]
                 .filter(Boolean)  // Remove empty values
                 .join(', ')
-
-            return formattedLocation || `${latitude}, ${longitude}`
-        } else {
-            return `${latitude}; ${longitude}`
         }
+
+        // If no formatted location was created, use coordinates as string
+        if (!formattedLocation) {
+            formattedLocation = `${latitude}, ${longitude}`
+        }
+
+        // Return both formatted location and coordinates
+        return {
+            formattedLocation,
+            coordinates: {
+                latitude,
+                longitude
+            }
+        }
+
     } catch (error) {
         console.error("Error fetching location:", error)
-        return `${position.coords.latitude}, ${position.coords.longitude}`
+        return {
+            formattedLocation: `${position.coords.latitude}, ${position.coords.longitude}`,
+            coordinates: {
+                latitude: position.coords.latitude,
+                longitude: position.coords.longitude
+            }
+        }
     }
 }
 

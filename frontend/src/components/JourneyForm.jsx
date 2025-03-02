@@ -10,6 +10,7 @@ const JourneyForm = ({
   setStartDate,
   tripDuration,
   setTripDuration,
+  coordinates,
   isLoadingLocation,
   locationError,
   getCurrentLocation,
@@ -50,6 +51,7 @@ const JourneyForm = ({
           tripDuration={tripDuration}
           tripStartDate={startDate}
           startLocation={startLocation}
+          startLocationCoordinates={coordinates}
         />
       )}
     </div>
