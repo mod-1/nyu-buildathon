@@ -90,7 +90,13 @@ def getItinerary():
         queryString += f"I would love to do the following activities in my trip: {activities}\n"
     queryString += "Could you give me a day wise itinerary with approximate time. Please return the itinerary in JSON format."
 
-    return json.dumps(getItineryJson(queryString))
+    outputJson={}
+    outputJson["activities"]=getActivitiesJson(queryString)
+    outputJson["flight"]=flightInfo
+    outputJson["hotel"]=hotel
+    outputJson["taxi"]=taxiInfo
+
+    return json.dumps(outputJson)
 
 @app.route('/claude/getActivities')
 def getActivities():
@@ -106,7 +112,7 @@ def getActivities():
     queryString += "I am travelling "+params["travellingWith"]+".\n"
     queryString += "I want to visit places that have "+params["placeType"]+".\n"
     # queryString += "I want to stay in "+params["stayType"]+".\n"
-
+    outputJson=json.dumps(getActivitiesJson(queryString))
     return json.dumps(getActivitiesJson(queryString))
 
 @app.route('/hotels/filterHotels')
