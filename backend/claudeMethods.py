@@ -17,7 +17,11 @@ def getActivitiesJson(queryStr:str):
         model="claude-3-7-sonnet-20250219",
         max_tokens=1000,
         temperature=1,
-        system="You are a travel guide and would return 4 places and 4 subjects of activities per place that match the user prompt. Return data in a json format. Don't return anything except for the places and activities. Return only a few key words for each activity. Return each place in ( city, country) format only.",
+        system='''You are a travel guide and will return 4 different cities and 4 activities per city that match the user prompt.
+        Always return data in a json format. Don't return anything except for the places and activities. 
+        Return only a few key words for each activity.
+        Return each place in (city, country) format only.
+        The json structure is as follows: {"places": [{"location": <city>, "activities": []}]}''',
         messages=[
             {
                 "role": "user",
