@@ -44,7 +44,116 @@ def getItineryJson(queryStr:str):
         model="claude-3-7-sonnet-20250219",
         max_tokens=2000,
         temperature=1,
-        system="You are an itinerary generator based on the user prompt and return it as a json with step number as key and the details as value",
+        system='''You should generate an itinerary based on the user prompt.
+        Return it as a json
+        The json structure should be exactly as follows:
+        {
+            // Flight information
+            "flight": {
+                "id": "flight-123",
+                "price": {
+                "raw": 37.9,                // Numeric value for calculations
+                "formatted": "$38"          // String with currency symbol
+                },
+                "legs": [{
+                "carriers": {
+                    "marketing": [{
+                    "name": "Frontier Airlines",
+                    "logoUrl": "https://logos.skyscnr.com/images/airlines/favicon/F9.png"
+                    }]
+                },
+                "origin": {
+                    "displayCode": "LGA",
+                    "city": "New York"
+                },
+                "destination": {
+                    "displayCode": "MIA",
+                    "city": "Miami"
+                },
+                "durationInMinutes": 195,
+                "departure": "2025-03-10T12:29:00",
+                "arrival": "2025-03-10T15:44:00"
+                }]
+            },
+            
+            // Hotel information
+            "hotel": {
+                "hotel_id": 12526017,
+                "property": {
+                "name": "Women Only Rooms - Men Only Rooms - Free WiFi",
+                "accuratePropertyClass": 3,
+                "reviewScore": 5.3,
+                "reviewCount": 94,
+                "reviewScoreWord": "Fair",
+                "wishlistName": "Miami",
+                "priceBreakdown": {
+                    "grossPrice": {
+                    "value": 67.5
+                    },
+                    "excludedPrice": {
+                    "value": 9.79
+                    },
+                    "strikethroughPrice": {
+                    "value": 75
+                    }
+                },
+                "photoUrls": [
+                    "https://cf.bstatic.com/xdata/images/hotel/square500/641623022.jpg"
+                ],
+                "checkin": {
+                    "fromTime": "00:00"
+                },
+                "checkout": {
+                    "untilTime": "10:00"
+                }
+                }
+            },
+            
+            // Taxi/transfer information
+            "taxi": {
+                "price": {
+                "amount": "66.94",
+                "currencyCode": "USD"
+                },
+                "supplierName": "E-Life Limo",
+                "categoryLocalised": "Standard",
+                "duration": 21,
+                "drivingDistance": 14.3,
+                "passengerCapacity": 3,
+                "bags": 3
+            },
+            
+            // Daily activities
+            "activities": {
+                "1": {
+                "title": "Arrival and check-in",
+                "activities": [
+                    // Format option 1: Strings with time and description
+                    "15:44 - Arrive at Miami International Airport",
+                    "16:30 - Check-in at accommodation",
+                    "19:00 - Dinner at Ocean Drive"
+                ]
+                },
+                "2": {
+                "title": "Highlight of the day",
+                "activities": [
+                    // Format option 2: Objects with time and description
+                    {
+                    "time": "08:00",
+                    "description": "Breakfast at the accommodation"
+                    },
+                    {
+                    "time": "09:30",
+                    "description": "Head to South Beach for lounging and swimming"
+                    },
+                    {
+                    "time": "19:00", 
+                    "description": "Dinner at Ocean Drive restaurant"
+                    }
+                ]
+                }
+            }
+        }''',
         messages=[
             {
                 "role": "user",

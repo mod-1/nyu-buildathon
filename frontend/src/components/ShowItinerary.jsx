@@ -66,7 +66,7 @@ const ShowItinerary = () => {
     } : null;
 
     // Create days array from NEW activities structure
-    const activitiesData = itinerary?.activities || {};
+    const activitiesData = itinerary?.activities?.activiites || {};
     const daysData = Object.keys(activitiesData).map(dayNum => ({
         number: parseInt(dayNum),
         title: activitiesData[dayNum].date,
