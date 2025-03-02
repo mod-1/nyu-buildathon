@@ -16,7 +16,7 @@ def home():
 @app.route('/claude/getCountryImage')
 def getCountryImage():
     params = req.args.to_dict()
-    print(params)
+    # print(params)
     return params["country"]
 
 @app.route('/claude/generateItinerary', methods=['POST'])
@@ -40,8 +40,8 @@ def getItinerary():
     departure_date = "2025-03-15"
 
     flightInfo=airTravel(originAirport=srcStr, destinationAirport=destStr, date=arrival_date)
-    print(flightInfo.keys())
-    print(f"Flight Info: {flightInfo}")
+    # print(flightInfo.keys())
+    # print(f"Flight Info: {flightInfo}")
     airportLoc=f"{flightInfo['legs'][0]['origin']} Airport"
     departureTime = datetime.strptime(flightInfo["legs"][0]["departure"], "%Y-%m-%dT%H:%M:%S")
     arrivalTime=datetime.strptime(flightInfo["legs"][-1]["arrival"], "%Y-%m-%dT%H:%M:%S")
@@ -49,11 +49,14 @@ def getItinerary():
     for leg in flightInfo["legs"]:
         durationInMin+=leg["durationInMinutes"]
 
-    print(departureTime)
+    # print(departureTime)
 
     dest_id=getDestination(destQuery)
-    print(destQuery,dest_id)
-    hotel=getHotels(dest_id=dest_id,arrival_date=arrival_date,departure_date=departure_date)["data"]["hotels"][0]
+    # print(destQuery,dest_id)
+    hotels=getHotels(dest_id=dest_id,arrival_date=arrival_date,departure_date=departure_date)["data"]["hotels"]
+    for hotel in hotels:
+        print(hotel["property"]["name"])
+    hotel=hotels[0]
     hotelName=hotel["property"]["name"]
     hotelPrice=hotel["property"]["priceBreakdown"]["grossPrice"]["value"]
     # print(f"Hotel selected: {hotel}")
@@ -151,7 +154,7 @@ def getTaxiDetails():
     dest_id = getTaxiDestination(destStr)["data"][0]["googlePlaceId"]
     src_id = getTaxiDestination(srcStr)["data"][0]["googlePlaceId"]
 
-    print(dest_id,src_id)
+    # print(dest_id,src_id)
     pick_up_date = params["pick_up_date"]
     pick_up_time = params["pick_up_time"]
 

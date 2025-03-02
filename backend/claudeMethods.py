@@ -30,9 +30,9 @@ def getActivitiesJson(queryStr:str):
             }
         ]
     )
-    print(message.content)
+    # print(message.content)
     json_data = json.loads(message.content[0].text[7:-3])
-    print(json_data)
+    # print(json_data)
     return json_data
 
 def getItineryJson(queryStr:str):
