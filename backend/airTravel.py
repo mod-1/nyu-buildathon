@@ -8,9 +8,9 @@ import os
 dotenv.load_dotenv()
 
 
-api_keys= os.getenv("AIR_TRAVEL_API")
+api_key= os.getenv("AIR_TRAVEL_API")
 headers = {
-    'x-rapidapi-key': api_keys,
+    'x-rapidapi-key': api_key,
     #  
     # The above is the API key in case things don't work
     'x-rapidapi-host': "sky-scrapper.p.rapidapi.com"
@@ -65,6 +65,7 @@ def getTravelDetails(originAirport="London", destinationAirport="New York", date
     #print(relevantFlightParams_org)
     #print(relevantFlightParams_des)
     #originSkyId,destinationSkyId,date,originEntityId,destinationEntityId,cabinClass,adults=1,sortBy='best'
+    print(dorg,ddes)
     originSkyId=      relevantFlightParams_org[0]["skyId"]
     destinationSkyId= relevantFlightParams_des[0]["skyId"]
     originEntityId=   relevantFlightParams_org[0]["entityId"]
@@ -75,12 +76,11 @@ def getTravelDetails(originAirport="London", destinationAirport="New York", date
     #print("XXXXXXXXXXXXXXXXXXXXXXXX")
     
     z1=getJSONdata(originSkyId,destinationSkyId,date,originEntityId,destinationEntityId,cabinClass,adults)
-    print(z1)
 
     return z1
 
 def airTravel(originAirport="London", destinationAirport="New York", date='2025-05-25',cabinClass="economy",adults='1',sortBy="price_high",k_value=0):
     ans= getTravelDetails(originAirport,destinationAirport,date,cabinClass,adults,sortBy)
-    return json.dumps(ans['data']['itineraries'][k_value])
+    return ans['data']['itineraries'][k_value]
 
 

@@ -204,9 +204,9 @@ const ActivityComparison = () => {
 
             // Create the request data object
             const itineraryRequestData = {
-                location: primaryLocation,
+                destination: primaryLocation,
                 activities: selectedActivities,
-                startLocation: tripDetails.location || '',
+                source: tripDetails.location || '',
                 startDate: tripDetails.startDate || new Date().toISOString(),
                 days: tripDetails.duration || 3,
                 startLocationCoordinates: tripDetails.startLocationCoordinates || { latitude: null, longitude: null }
