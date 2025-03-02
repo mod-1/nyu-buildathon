@@ -115,8 +115,8 @@ nyu-buildathon/
 
 ## Screenshots
 
-![Screenshot 1](frontend/src/assets/trip_planning.jpg)
-![Screenshot 2](frontend/src/assets/trip_summary.jpg)
+![Screenshot 1](assets/trip_planning.jpg)
+![Screenshot 2](assets/trip_summary.jpg)
 
 ## Contributors
 
