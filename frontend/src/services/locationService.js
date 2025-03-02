@@ -11,11 +11,9 @@ const getCurrentLocationFromAPI = async (position) => {
         if (data && data.localityInfo) {
             // Format the location based on available data
             const city = data.city || ''
-            const countryName = data.countryName || ''
+            // const countryName = data.countryName || ''
 
-            formattedLocation = [city, countryName]
-                .filter(Boolean)  // Remove empty values
-                .join(', ')
+            formattedLocation = city
         }
 
         // If no formatted location was created, use coordinates as string
